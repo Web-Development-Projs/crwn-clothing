@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Homepage, Shop } from './pages';
+import { Homepage, Shop, SignInandSignUp } from './pages';
 
 export default function Routes() {
     return (
@@ -16,6 +16,9 @@ export default function Routes() {
           }} />
           <Route exact path="/shop" render={routeProps => {
               return <Shop {...routeProps} />
+          }} />
+          <Route path="/signin" render={routeProps => {
+              return <SignInandSignUp {...routeProps} />
           }} />
       </Switch>
     );
