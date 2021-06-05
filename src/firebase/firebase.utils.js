@@ -29,5 +29,34 @@ provider.setCustomParameters({
 });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const createUserProfileDocument = async (userAuth=null, additionalData=null) => {
+    if(!userAuth) return;
+
+    const userRef = firestore.collection('/users').doc(userAuth.uid);
+    
+    const docSnapshot = userRef.get(); // * document data
+
+    if(!docSnapshot.exists) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+
+        console.log(userAuth, displayName);
+        console.log(additionalData);
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                additionalData,
+            });
+        }
+        catch(err) {
+            console.error(err.message);
+        }
+    }
+
+    return userRef;
+ }
+ 
 
 export default firebase;

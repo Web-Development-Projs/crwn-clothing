@@ -6,3 +6,4 @@ export { default as CollectionItem } from './CollectionItem/CollectionItem';
 export { default as SignIn } from './SignIn/SignIn';
 export { default as FormInput } from './FormInput/FormInput';
 export { default as Button } from './Button/Button';
+export { default as SignUp } from './SignUp/SignUp';

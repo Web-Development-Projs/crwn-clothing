@@ -1,0 +1,9 @@
+.SignUp {
+    display: flex;
+    flex-direction: column;
+    width: 23.75rem;
+
+    &__title {
+        margin: 10px 0;
+    }
+}

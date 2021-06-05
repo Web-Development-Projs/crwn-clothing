@@ -14,10 +14,16 @@ export default function SignIn() {
     function handlePassword(e) {
         setPassword(e.target.value);
     }
-    function handleSubmit(e) {
-        e.preventDefault();
 
-        auth.signInWithEmailAndPassword(email, password);
+    async function handleSubmit(e) {
+        e.preventDefault();
+        
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+        }
+        catch(err) {
+            console.error(err.message);
+        }
     }
 
     return (
