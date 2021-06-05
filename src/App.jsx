@@ -19,6 +19,7 @@ export default class App extends Component {
       // * listen to when users signs in or OUT*
       this.unsubscribe = auth.onAuthStateChanged(async (user) => {
          // * if user is registered in the app
+         console.log(1);
          if(user) {
             const userRef = await createUserProfileDocument(user);
 

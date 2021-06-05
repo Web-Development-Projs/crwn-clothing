@@ -38,10 +38,13 @@ export default function SignUp() {
                 // * set up authentication
                 const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-                console.log(auth.currentUser);
+                const userData = {
+                    ...user,
+                    displayName,
+                }
 
                 // * Store user in users collection
-                await createUserProfileDocument(user, { displayName });
+                await createUserProfileDocument(userData, { displayName });
 
                 // * Reset form
                 setDisplayName('');
