@@ -3,10 +3,13 @@ import "./SignIn.styles.scss";
 import { FormInput, Button } from '../index';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
 import { auth } from '../../firebase/firebase.utils';
+import { useHistory } from 'react-router-dom';
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const history = useHistory();
 
     function handleEmail(e) {
         setEmail(e.target.value);
@@ -20,9 +23,20 @@ export default function SignIn() {
         
         try {
             await auth.signInWithEmailAndPassword(email, password);
+
+            setEmail('');
+            setPassword('');
+
+            //history.push('/home');
         }
-        catch(err) {
-            console.error(err.message);
+        catch(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                 alert('Wrong password.');
+            } else {
+                 console.log(errorMessage);
+            }
         }
     }
 

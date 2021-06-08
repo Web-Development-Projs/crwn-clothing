@@ -19,19 +19,19 @@ export default class App extends Component {
       // * listen to when users signs in or OUT*
       this.unsubscribe = auth.onAuthStateChanged(async (user) => {
          // * if user is registered in the app
-         console.log(1);
-         if(user) {
-            const userRef = await createUserProfileDocument(user);
+         if ( user ) {
+               const userRef = await createUserProfileDocument(user);
 
-            // * listen to any changes to the data
-            userRef.onSnapshot(snapshot => {
-                this.setState({
-                    currentUser: {
-                       id: snapshot.id,
-                       ...snapshot.data()
-                    }
-                });
-            });
+               // * listen to any changes to the data
+               userRef.onSnapshot(snapshot => {
+                  this.setState({
+                     currentUser: {
+                        id: snapshot.id,
+                        ...snapshot.data()
+                     }
+                  });
+               });
+            
          }
          else { // * When user signs out
             this.setState({
@@ -48,7 +48,7 @@ export default class App extends Component {
   render() {
     return (
       <main className="App__container">
-         <Header user={this.state.user} />
+         <Header user={this.state.currentUser} />
          <Routes />
       </main>
     );
